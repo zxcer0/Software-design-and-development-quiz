@@ -1,0 +1,81 @@
+import random 
+import os
+number = 0
+#These variables are the questions
+debugging = "The process of locating and fixing or bypassing bugs (errors) in computer program code or the engineering of a hardware device."
+ergonomics = "The science of refining the design of products to optimize them for human use. Human characteristics, such as height, weight, and proportions are considered, as well as information about human hearing, sight, and so on."
+open_source = "Describes a program whose source code is made available for use or modification as users or other developers see fit."
+bug = "A coding error in a computer program."
+benchmarking = "A method used to measure the performance of a system or application by running it under closely controlled conditions."
+rapid_application_development = "A process in which a programmer makes use of software packages to quickly build applications to meet the users needs."
+encryption = "The coding and scrambling of messages to prevent unauthorized access to or understanding of the data being stored or transmitted."
+operating_system = "System software that manages and controls the activities of the computer. It acts as the interface between applications and the computer hardware."
+aspect_oriented_programming = "An approach to programming that allows global properties of a program to determine how it is compiled into an executable program."
+systems_development_method = "A work discipline that is chosen by the developers of a computer system or product as a way to ensure successful results."
+definition_dict =	{
+  "ergonomics": ergonomics,
+  "bug": bug,
+  "debugging": debugging,
+  "open source": open_source,
+  "benchmarking": benchmarking,
+  "rapid application development": rapid_application_development,
+  "encryption": encryption,
+  "operating system": operating_system,
+  "aspect oriented programming": aspect_oriented_programming,
+  "systems development method": systems_development_method,
+}
+print("Welcome to the software design and development quiz program!\n")
+#infinite loop
+while number == 0: 
+  user_prompt = input("Please select what you would like to do:\n\n1) Glossary\n2) Quiz\n3) Exit\n\n").lower()
+  if user_prompt == "glossary" or user_prompt == str("1"):
+    #This print statement shows the word WITH the definition unlike the variables which only contain the definition, this print statement is for the glossary and the variables are for the questions. If i were to make seperate variables for these definitons it would clunk my code up more as im trying to make my program have less lines of code not more so it can look cleaner.
+    print("\n\nDebugging: The process of locating and fixing or bypassing bugs (errors) in computer program code or the engineering of a hardware device.\n\nErgonomics: The science of refining the design of products to optimize them for human use. Human characteristics, such as height, weight, and proportions are considered, as well as information about human hearing, sight,and so on.\n\nSystems development method (SDM): A work discipline that is chosen by the developers of a computer system or product as a way to ensure successful results.\n\nOpen source: Describes a program whose source code is made available for use or modification as users or other developers see fit.\n\nBug: A coding error in a computer program.\n\nBenchmarking: A method used to measure the performance of a system or application by running it under closely controlled conditions\n\nAspect Oriented Programming (AOD): An approach to programming that allows global properties of a program to determine how it is compiled into an executable program.\n\nRapid application development (RAD): A process in which a programmer makes use of software packages to quickly build applications to meet the users’ needs\n\nEncryption: The coding and scrambling of messages to prevent unauthorized access to or understanding of the data being stored or transmitted.\n\nOperating system: System software that manages and controls the activities of the computer. The operating system acts as the interface between applications and the computer hardware.\n\n")
+  elif user_prompt == "quiz" or user_prompt == str("2"):
+    #command clears screen so the user cannot look at the glossary while taking the quiz.
+    os.system("clear")
+    #the 3 commands below also function as resetting the parameters of answers and correct questions, this is so when the user takes the quiz a 2nd time, the results of the 1st quiz wont add/collide with the results of the 2nd time.
+    correct_questions = 0
+    user_incorrect = []
+    user_correct = []
+    question_input_incorrect = []
+    print("\nFor the following definitons, please type in the word that matches the definiton\nNote: Make sure NOT to type the abbreviation of the corresponding definition, rather type in the full abbreviation/word:\n")
+    #this creates a copy of my first dicitionary, this is so if the user wants to take the quiz a 2nd time, the dictionary wont be empty. This command is what ultimately can make my program loop. Ill leave flag lists till year 12...
+    quiz_dict = dict(definition_dict)
+    for times in range(0,10):
+      answer, random_definition = random.choice(list(quiz_dict.items()))
+      print("\n")
+      print(random_definition)
+      question_input = input("\n").lower()
+      if question_input == answer:
+        correct_questions = correct_questions + 1
+        user_correct.append(answer)
+        del quiz_dict[answer]
+      else: 
+        user_incorrect.append(answer)
+        question_input_incorrect.append(question_input)
+        del quiz_dict[answer]
+    print("\nYou got", correct_questions,"out of 10 correct.\n")
+    if correct_questions <= 4:
+      print("You can do better than that :(\n")
+    elif correct_questions >= 5 and correct_questions <= 9:
+      print("You passed, Good job! Lets try aim for 10/10 next time.\n")
+    else:
+      print("Congratulations, you got 10/10! Amazing job!\n")
+    #the first and easier way to print items from a list. Im printing the definitions the user got correct.
+    print("The definitions you were correct for are:", *user_correct, sep = "\n")
+    print("\n")
+    print("The definitions you were incorrect for are:")
+    #this is another way to print items from a list. This statement is to print what definitions the user got incorrect. i printed my list this way so i can display 2 items from 2 different lists on the same line. Im still unsure if zip is the correct way to do this.
+    for incorrect, user_incorrect in zip(user_incorrect, question_input_incorrect):
+      print(incorrect , "- You inputted:", user_incorrect)
+    if correct_questions == 10:
+      print("")
+    else:
+      print("Revising these is important to pass the quiz\n")
+  elif user_prompt == str(3) or user_prompt == "exit":
+    os.system("clear")
+    #this stops the program so you can exit it.
+    break
+  else:
+    print("Unexpected input, Please try again.\n")
