@@ -40,7 +40,7 @@ while number == 0:
     user_correct = []
     question_input_incorrect = []
     print("\nFor the following definitons, please type in the word that matches the definiton\nNote: Make sure NOT to type the abbreviation of the corresponding definition, rather type in the full abbreviation/word:\n")
-    #this creates a copy of my first dicitionary, this is so if the user wants to take the quiz a 2nd time, the dictionary wont be empty. This command is what ultimately can make my program loop. Ill leave flag lists till year 12...
+    #this creates a copy of my first dicitionary, this is so if the user wants to take the quiz a 2nd time, the dictionary wont be empty. This command is what ultimately can make my program loop. 
     quiz_dict = dict(definition_dict)
     for times in range(0,10):
       answer, random_definition = random.choice(list(quiz_dict.items()))
@@ -66,7 +66,7 @@ while number == 0:
     print("The definitions you were correct for are:", *user_correct, sep = "\n")
     print("\n")
     print("The definitions you were incorrect for are:")
-    #this is another way to print items from a list. This statement is to print what definitions the user got incorrect. i printed my list this way so i can display 2 items from 2 different lists on the same line. Im still unsure if zip is the correct way to do this.
+    #this is another way to print items from a list. This statement is to print what definitions the user got incorrect. i printed my list this way so i can display 2 items from 2 different lists on the same line.
     for incorrect, user_incorrect in zip(user_incorrect, question_input_incorrect):
       print(incorrect , "- You inputted:", user_incorrect)
     if correct_questions == 10:
