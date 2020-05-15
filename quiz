@@ -41,7 +41,7 @@ while number == 0:
     question_input_incorrect = []
     print("\nFor the following definitons, please type in the word that matches the definiton\nNote: Make sure NOT to type the abbreviation of the corresponding definition, rather type in the full abbreviation/word:\n")
     #this creates a copy of my first dicitionary, this is so if the user wants to take the quiz a 2nd time, the dictionary wont be empty. This command is what ultimately can make my program loop. 
-    quiz_dict = dict(definition_dict)
+    quiz_dict = definition_dict.copy()
     for times in range(0,10):
       answer, random_definition = random.choice(list(quiz_dict.items()))
       print("\n")
